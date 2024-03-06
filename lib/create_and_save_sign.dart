@@ -38,10 +38,17 @@ class _CreateAndSaveSignState extends State<CreateAndSaveSign> {
       // Save to filesystem
       final file = File(filename);
 
+      //* For MultipartFile */
+      /* Map<String, dynamic> body = {};
+      body["name"] = "PPMS";
+      body['sign'] = await MultipartFile.fromFile(file.path, filename: basename(file.path));
+      print("HEllo File is >>>>>>>>>>>>>>>>>>>>>>  : ${body}"); */
+
       await file.writeAsBytes(bytes!.buffer.asUint8List());
 
       // Ask the user to save it
       final params = SaveFileDialogParams(sourceFilePath: file.path);
+
       final finalPath = await FlutterFileDialog.saveFile(params: params);
 
       if (finalPath != null) {
